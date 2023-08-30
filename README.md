@@ -54,6 +54,12 @@ TuneTreasureDRF - это каталог музыки на базе Django Rest F
 - Songs: /api/songs/
 - Album Songs: /api/album-songs/
 
+### Стек технологий:
+- Django REST Framework
+- Swagger
+- PostgreSQL
+- Docker
+
 ### Автор
 Tina Kirilenko 📧 Telegram: @Mi_2018
 
