@@ -1,6 +1,10 @@
 from rest_framework import viewsets
-from musical_catalog.models import Artist, Album, Song, AlbumSong
-from .serializers import ArtistSerializer, AlbumSerializer, SongSerializer, AlbumSongSerializer
+
+from musical_catalog.models import Album, AlbumSong, Artist, Song
+
+from .serializers import (AlbumSerializer, AlbumSongSerializer,
+                          ArtistSerializer, SongSerializer)
+
 
 class ArtistViewSet(viewsets.ModelViewSet):
     """

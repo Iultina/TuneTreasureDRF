@@ -1,7 +1,8 @@
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
-from musical_catalog.models import Artist, Album, Song, AlbumSong
+
+from musical_catalog.models import Album, AlbumSong, Artist, Song
 
 
 class ArtistTests(APITestCase):

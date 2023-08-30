@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.models import Group, User
-from .models import Artist, Album, Song, AlbumSong
+
+from .models import Album, AlbumSong, Artist, Song
 
 admin.site.register(Artist)
 admin.site.register(Album)

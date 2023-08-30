@@ -1,5 +1,9 @@
+from datetime import datetime
+
 from rest_framework import serializers
-from musical_catalog.models import Artist, Album, Song, AlbumSong
+
+from musical_catalog.models import Album, AlbumSong, Artist, Song
+
 
 class ArtistSerializer(serializers.ModelSerializer):
     """
@@ -8,6 +12,7 @@ class ArtistSerializer(serializers.ModelSerializer):
     class Meta:
         model = Artist
         fields = ('id', 'name',)
+
 
 class AlbumSerializer(serializers.ModelSerializer):
     """
@@ -19,6 +24,12 @@ class AlbumSerializer(serializers.ModelSerializer):
     class Meta:
         model = Album
         fields = ('id', 'title', 'artist', 'release_year')
+
+    def validate_release_year(self, value):
+        current_year = datetime.now().year
+        if value > current_year:
+            raise serializers.ValidationError('The release year cannot be in the future')
+        return value
 
 
 class SongSerializer(serializers.ModelSerializer):

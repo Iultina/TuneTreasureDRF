@@ -1,6 +1,7 @@
-from django.urls import path, include
+from django.urls import include, path
 from rest_framework.routers import DefaultRouter
-from .views import ArtistViewSet, AlbumViewSet, SongViewSet, AlbumSongViewSet
+
+from .views import AlbumSongViewSet, AlbumViewSet, ArtistViewSet, SongViewSet
 
 app_name = 'api_v1'
 
