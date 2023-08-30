@@ -76,7 +76,7 @@ class AlbumSong(models.Model):
         ]
 
     def save(self, *args, **kwargs): 
-    # Если у экземпляра нет заданного номера трека (то есть он новый), вычисляем следующий доступный номер трека
+    # If the instance does not have a set track number (i.e., it's new), we compute the next available track number
         if not self._track_number:
             last_track = AlbumSong.objects.filter(album=self.album).order_by('-_track_number').first() 
             if last_track: 
@@ -90,8 +90,8 @@ class AlbumSong(models.Model):
 
 @receiver(post_delete, sender=AlbumSong)
 def update_track_numbering(sender, instance, **kwargs):
-    """Обновляет нумерацию треков после удаления трека."""
-    # Получаем все треки альбома, следующие за удаленным, и обновляем их нумерацию
+    """Updates the track numbering after a track is deleted."""
+    # Retrieve all tracks of the album that come after the deleted one, and update their numbering
     tracks_after_deleted = AlbumSong.objects.filter(album=instance.album, _track_number__gt=instance._track_number)
     for track in tracks_after_deleted:
         track._track_number -= 1

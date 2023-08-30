@@ -7,36 +7,30 @@ class ArtistSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = Artist
-        fields = ('name',)
+        fields = ('id', 'name',)
 
 class AlbumSerializer(serializers.ModelSerializer):
     """
     Serializer for the Album model. It serializes all fields related to a musical album, 
     including details like title, associated artist, and release year.
     """
-    artist = serializers.StringRelatedField()
+    artist = serializers.PrimaryKeyRelatedField(queryset = Artist.objects.all())
 
     class Meta:
         model = Album
-        fields = ('title', 'artist', 'release_year')
+        fields = ('id', 'title', 'artist', 'release_year')
 
-
-class AlbumTitleSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Album
-        fields = ('id', 'title')
 
 class SongSerializer(serializers.ModelSerializer):
     """
     Serializer for the Song model. It serializes all fields related to a musical song, 
     which can be part of multiple albums.
     """
-    # albums = AlbumTitleSerializer(many=True, read_only=True)
-    albums = serializers.StringRelatedField(many=True)
 
     class Meta: 
         model = Song 
-        fields = ('title', 'albums')
+        fields = ('id', 'title', 'albums')
+
 
 class AlbumSongSerializer(serializers.ModelSerializer):
     """
@@ -44,9 +38,8 @@ class AlbumSongSerializer(serializers.ModelSerializer):
     the many-to-many relationship between songs and albums. It also serializes details 
     like track numbers within an album.
     """
-    album = serializers.SerializerMethodField()
-    song = serializers.SerializerMethodField()
-    _track_number = serializers.IntegerField(read_only=True) 
+    album = serializers.PrimaryKeyRelatedField(queryset=Album.objects.all())
+    song = serializers.PrimaryKeyRelatedField(queryset=Song.objects.all())
 
     class Meta: 
         model = AlbumSong 

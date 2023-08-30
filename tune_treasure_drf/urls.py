@@ -20,8 +20,8 @@ schema_view = get_schema_view(
 
 
 urlpatterns = [
-    path('api/', include('api.v1.urls'), namespace='api_v1'),
-    path('admin/', admin.site.urls),
+   path('api/', include('api.v1.urls', namespace='api_v1')),
+   path('admin/', admin.site.urls),
 ]
 
 urlpatterns += [
